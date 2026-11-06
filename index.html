@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#092341">
+  <meta name="description" content="仕事のやりとりを、組織の力に。HRoboは日々の業務コミュニケーションから社員の強みを可視化し、根拠ある対話と人材活用につなげるAI人材マネジメントツールです。">
+  <title>HRobo｜仕事のやりとりを、組織の力に。</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #092341; --navy-deep:#04182f; --navy-soft:#133759;
+      --ink:#102a47; --muted:#5f7082; --mint:#54dfc2; --mint-dark:#139e88;
+      --aqua:#9dece6; --paper:#fcfdfd; --cloud:#f1f7f7; --line:#dce7e8;
+      --serif:"Noto Serif JP","Yu Mincho","Hiragino Mincho ProN",serif;
+      --sans:"Noto Sans JP","Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:88px}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+    img{max-width:100%;display:block} a{color:inherit} button,input{font:inherit}
+    a:focus-visible,button:focus-visible{outline:3px solid #15baa9;outline-offset:4px}
+    .wrap{width:min(1150px,calc(100% - 56px));margin-inline:auto}
+    .header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.95);border-bottom:1px solid #e2ebec;backdrop-filter:blur(16px)}
+    .header-inner{min-height:82px;display:flex;align-items:center;gap:38px}
+    .logo{display:flex;align-items:center;flex:0 0 auto}
+    .logo img{width:156px;height:auto}
+    .tagline{font-family:var(--serif);font-size:12px;line-height:1.6;border-left:1px solid #a9bac4;padding-left:19px;letter-spacing:.06em;color:#355168;white-space:nowrap}
+    .nav{display:flex;gap:27px;align-items:center;margin-left:auto}
+    .nav a{text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.06em;transition:color .2s}
+    .nav a:hover{color:var(--mint-dark)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:13px;border-radius:3px;padding:15px 23px;text-decoration:none;font-size:13px;font-weight:700;letter-spacing:.04em;transition:transform .2s,background .2s,box-shadow .2s;cursor:pointer;border:1px solid transparent}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-dark{color:#fff;background:var(--navy)}
+    .btn-dark:hover{background:#174265}
+    .btn-mint{background:var(--mint);color:#032f32;box-shadow:0 14px 34px #033c3b45}
+    .btn-mint:hover{background:#81f4dc}
+    .btn-ghost{border-color:#ffffff78;color:#fff;background:#ffffff0c}
+    .btn-ghost:hover{background:#ffffff20}
+    .arrow{font-size:18px;font-weight:400}
+    .menu-toggle{display:none;background:transparent;border:0;font-size:27px;color:var(--navy);cursor:pointer}
+    .eyebrow{display:flex;align-items:center;gap:15px;color:var(--mint);font-weight:700;letter-spacing:.19em;font-size:13px}
+    .eyebrow::before{content:"";width:33px;height:2px;background:currentColor}
+    .section-index{font:500 14px var(--sans);letter-spacing:.13em;color:var(--mint-dark);margin-bottom:22px;display:inline-block}
+    .hero{isolation:isolate;position:relative;overflow:hidden;background:linear-gradient(126deg,#d5fff6 0%,#96f0e2 53%,#5dceca 100%);color:var(--navy)}
+    .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(135deg,transparent 56%,#ffffff38 58%,transparent 75%);transform:translateX(11%)}
+    .hero::after{content:"";position:absolute;right:-255px;bottom:-285px;width:680px;height:660px;z-index:-1;background:linear-gradient(135deg,#04223c,#1e5273);transform:rotate(44deg);border-radius:30px}
+    .hero-grid{min-height:682px;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(350px,.92fr);gap:55px;align-items:center;padding-block:90px 100px}
+    .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(37px,4.25vw,58px);letter-spacing:-.06em;line-height:1.46;margin:28px 0 21px}
+    .hero h1 .glow{color:var(--navy);text-shadow:none}
+    .hero-lead{font:400 clamp(17px,1.8vw,23px)/1.8 var(--serif);letter-spacing:.025em;margin:0 0 22px}
+    .hero-desc{max-width:550px;color:#32576a;font-size:13px;line-height:2.25;margin:0}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:35px}
+    .hero-visual{position:relative;padding-top:46px}
+    .hero-visual::before{content:"";position:absolute;top:-12px;right:14px;width:150px;height:280px;border-radius:80px;background:linear-gradient(145deg,#164e72,#0c2c50);transform:rotate(29deg);opacity:.82;filter:drop-shadow(0 15px 55px #11475744)}
+    .hero-visual .poster-frame{max-width:430px;margin:0 auto;transform:rotate(1.6deg);padding:7px;box-shadow:0 28px 65px #0731434d}
+    .hero-visual .poster-frame:hover{transform:rotate(0) translateY(-5px)}
+    .mini-report{position:relative;background:#fff;color:var(--ink);border-radius:13px;overflow:hidden;box-shadow:0 40px 70px #0009;transform:rotate(1.8deg);border:1px solid #eaf1f1}
+    .mini-top{background:#e9f4f9;color:#3d6481;display:flex;align-items:center;justify-content:space-between;padding:13px 19px;font-size:10px;font-weight:700}
+    .mini-mark{display:inline-flex;align-items:center;gap:6px;color:#153c5e;font-size:12px;font-weight:800}
+    .mini-mark i{width:9px;height:22px;background:linear-gradient(#42d5b5,#0e365b);border-radius:9px;transform:rotate(28deg)}
+    .mini-body{padding:22px}
+    .mini-name{font-size:16px;font-weight:800;margin-bottom:3px}.mini-meta{font-size:9px;color:#8290a0;margin-bottom:22px}
+    .mini-panels{display:grid;grid-template-columns:1.1fr 1fr;gap:11px}
+    .mini-panel{padding:14px 12px;background:#fafcfd;border:1px solid #e7ecef;border-radius:6px}
+    .mini-panel h3{font-size:11px;margin:0 0 9px}.mini-panel p{font-size:9px;line-height:1.9;margin:0;color:#485f74}
+    .radar{width:100%;height:auto;max-height:154px;display:block}
+    .mini-table{margin-top:13px;border:1px solid #e4ebed;border-radius:5px;overflow:hidden}
+    .mini-row{display:grid;grid-template-columns:1fr 1.1fr 1.25fr;border-bottom:1px solid #e4ebed;min-height:38px}
+    .mini-row:last-child{border-bottom:0}.mini-row>*{font-size:9px;padding:9px 8px;border-right:1px solid #e4ebed}.mini-row>*:last-child{border-right:0}
+    .mini-row:first-child{background:#eef4f6;font-weight:800}.mini-row span:nth-child(2){color:#168e7f}
+    .mini-stamp{position:absolute;right:-14px;bottom:-22px;border:1px solid #ffffff4a;background:#072841;color:#d9fff3;padding:12px 18px;font:600 11px var(--sans);box-shadow:0 12px 40px #0004}
+    .hero-disclaimer{position:absolute;bottom:20px;right:28px;color:#345f72;font-size:10px}
+    .triad{background:#fff;box-shadow:0 16px 35px #153b4c0a}
+    .triad-grid{display:grid;grid-template-columns:repeat(3,1fr);padding-block:44px}
+    .triad-item{padding:8px 35px;border-right:1px solid #d4e3e5}.triad-item:first-child{padding-left:0}.triad-item:last-child{border:0}
+    .triad-n{color:var(--mint-dark);font:400 38px var(--serif);display:block}
+    .triad-item h3{font:600 20px var(--serif);margin:6px 0 9px}.triad-item p{font-size:12px;color:#6f8290;line-height:1.8;margin:0}
+    .why{padding:110px 0 120px;background:#fff}
+    .section-heading{max-width:800px;margin-bottom:45px}
+    .section-heading h2{font:600 clamp(34px,4vw,56px)/1.5 var(--serif);letter-spacing:-.055em;margin:12px 0 16px}
+    .section-heading p{font-size:14px;line-height:2;color:#526a7b;max-width:710px}
+    .comparison-labels{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-bottom:15px}
+    .comparison-labels span{padding:13px 20px;font:600 20px var(--serif);text-align:center;border-radius:100px}
+    .comparison-labels span:first-child{background:#e8edf1;color:#405770}
+    .comparison-labels span:last-child{background:#d8f8ee;color:#087b73}
+    .comparison-row{display:grid;grid-template-columns:1fr 62px 1fr;gap:0;align-items:stretch;margin-bottom:12px}
+    .compare{border-radius:8px;padding:27px 29px;background:#fff;box-shadow:0 6px 30px #1d485b08;min-height:104px}
+    .compare.old{border:1px solid #dce4e9}.compare.new{border:1px solid #b9eadf;background:#f6fffc}
+    .compare h3{font-size:17px;margin:0 0 7px;color:#183551}.compare.new h3{color:#007c72}
+    .compare p{font-size:12px;color:#6e7f8d;line-height:1.8;margin:0}
+    .compare-connector{align-self:center;text-align:center;color:#18b59d;font-size:22px}
+    .why-closer{font:600 clamp(22px,3.1vw,37px) var(--serif);text-align:center;margin-top:53px;letter-spacing:-.03em}
+    .pain-grid{display:grid;grid-template-columns:1fr;gap:0;margin-top:54px;max-width:1000px}
+    .pain-card{background:#fff;border-top:1px solid #c6e8df;min-height:170px;padding:12px 24px;display:grid;grid-template-columns:250px 1fr;align-items:center;gap:38px}
+    .pain-card:last-child{border-bottom:1px solid #c6e8df}
+    .pain-card .symbol{color:#c4f1e3;font:400 clamp(88px,9vw,125px)/1 var(--serif);letter-spacing:-.08em}
+    .pain-card h3{font:600 clamp(23px,2.9vw,37px)/1.55 var(--serif);margin:0}
+    .why-poster{max-width:410px;margin:45px auto 0}
+    .why-poster-title{color:#64828c;font-size:11px;text-align:center;margin:0 0 12px;letter-spacing:.1em}
+    .feature{padding:115px 0;background:#fff}
+    .feature.tint{background:#f5f9fa}
+    .feature.dark{background:radial-gradient(circle at 90% 10%,#235375,#092341 68%);color:#fff}
+    .feature-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(350px,.86fr);gap:95px;align-items:center}
+    .feature-grid.reverse .feature-copy{order:2}.feature-grid.reverse .poster-col{order:1}
+    .feature h2{font:600 clamp(32px,4vw,54px)/1.48 var(--serif);margin:10px 0 26px;letter-spacing:-.05em}
+    .feature .lead{font-size:15px;line-height:2.1;color:#526d7e;margin-bottom:30px}
+    .feature.dark .lead{color:#c4d5df}
+    .feature-bullets{list-style:none;padding:0;margin:0 0 34px;display:grid;gap:17px}
+    .feature-bullets li{font-size:14px;line-height:1.7;display:flex;gap:13px;align-items:flex-start}
+    .feature-bullets li::before{content:"";display:block;flex:0 0 9px;width:9px;height:9px;background:var(--mint-dark);border-radius:50%;margin-top:9px}
+    .feature.dark .feature-bullets li::before{background:var(--mint)}
+    .feature-foot{display:block;font-size:11px;color:#8a9aa5;margin-top:15px;line-height:1.8}
+    .feature.dark .feature-foot{color:#a9c5d0}
+    .poster-col{max-width:435px;margin:0 auto;width:100%;position:relative}
+    .poster-frame{display:block;position:relative;background:#fff;border-radius:5px;padding:9px;box-shadow:0 25px 58px #15365227;border:1px solid #e7eeee;transition:transform .3s,box-shadow .3s;cursor:zoom-in}
+    .poster-frame:hover{transform:translateY(-5px);box-shadow:0 35px 65px #15365240}
+    .poster-frame img{width:100%;aspect-ratio:1054/1492;object-fit:contain;background:#e9f0f3}
+    .poster-caption{position:absolute;left:-28px;bottom:28px;background:#0e3454;color:#fff;padding:13px 19px;box-shadow:0 15px 25px #09234142;font-size:11px;letter-spacing:.07em}
+    .poster-caption strong{color:var(--mint);font-family:var(--serif);font-size:22px;font-weight:400;margin-right:10px}
+    .mini-link{font-weight:700;font-size:12px;text-decoration:none;color:var(--mint-dark);border-bottom:1px solid var(--mint-dark);padding-bottom:4px}
+    .feature.dark .mini-link{color:var(--mint);border-color:var(--mint)}
+    .evidence-demo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+    .evidence-card{background:#fff;border:1px solid #dceaea;padding:20px;border-radius:5px;color:var(--navy)}
+    .evidence-card span{font:500 10px var(--sans);color:#008a79;letter-spacing:.1em}
+    .evidence-card p{font-size:12px;line-height:1.9;margin:11px 0 0}
+    .evidence-card.quote{background:#ebf8f4}
+    .search-example{margin-top:24px;background:#dcf9f2;padding:22px 27px;border-left:4px solid #21c0a4;max-width:620px}
+    .search-example .search-label{font-size:10px;letter-spacing:.15em;color:#087769;margin-bottom:8px;display:block;font-weight:800}
+    .search-example p{font:600 20px/1.6 var(--serif);margin:0;color:#103550}
+    .roles{margin-top:31px;border-top:1px solid #c8dbdd;max-width:600px}
+    .role{display:grid;grid-template-columns:120px 1fr;gap:14px;border-bottom:1px solid #c8dbdd;padding:15px 6px;font-size:12px;line-height:1.6}
+    .role strong{color:#008c7b}
+    .steps{padding:108px 0 110px;background:radial-gradient(ellipse at 75% 0,#255378,transparent 50%),var(--navy);color:#fff}
+    .steps h2{font:600 clamp(34px,4.5vw,60px)/1.45 var(--serif);margin:18px 0 15px}
+    .steps-intro{font-size:14px;line-height:2;color:#c1d7e4}
+    .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin:53px 0 50px}
+    .step{padding:32px 24px 31px;background:#ffffff09;border:1px solid #ffffff27;position:relative;min-height:220px}
+    .step::after{content:"";position:absolute;right:-20px;top:64px;width:17px;height:1px;background:var(--mint)}
+    .step:last-child::after{display:none}
+    .step-n{font:400 42px var(--serif);color:var(--mint);display:block;line-height:1.1}
+    .step h3{font-size:17px;margin:20px 0 11px}.step p{font-size:12px;color:#aec8d8;line-height:1.95;margin:0}
+    .cycle-bottom{display:grid;grid-template-columns:1fr auto;gap:45px;align-items:center;border-top:1px solid #ffffff42;padding-top:45px}
+    .cycle-bottom p{font:400 17px/1.9 var(--serif);margin:0;color:#e1f8f4}
+    .cycle-bottom a{font-size:13px;color:#0d2b3f;text-decoration:none;background:var(--mint);padding:15px 21px;font-weight:700}
+    .cta{padding:105px 0;background:#f1faf7;text-align:center}
+    .cta h2{font:600 clamp(31px,4vw,55px)/1.55 var(--serif);letter-spacing:-.04em;margin:12px 0 24px}
+    .cta p{font-size:14px;line-height:2;color:#576d7f;margin:0 auto 34px;max-width:720px}
+    .cta-actions{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+    .disclaimer{background:#fff;border-block:1px solid #e1ecee;padding:25px 0}
+    .disclaimer .wrap{display:flex;gap:16px;align-items:flex-start}.disclaimer strong{font-size:12px;white-space:nowrap;color:#0a806f}
+    .disclaimer p{font-size:11px;line-height:1.95;color:#6a7c87;margin:0}
+    footer{background:#061b33;color:#b9cad7;padding:42px 0}
+    .footer-inner{display:flex;justify-content:space-between;gap:30px;align-items:center}
+    .footer-brand{font-size:23px;font-weight:800;color:#fff}.footer-brand b{color:var(--mint)}
+    .footer-meta{text-align:right;font-size:11px;line-height:1.9}
+    .footer-meta a{color:#b9cad7}
+    .lightbox[hidden]{display:none}
+    .lightbox{position:fixed;inset:0;z-index:100;background:rgba(1,12,25,.95);display:flex;align-items:center;justify-content:center;padding:40px 60px;cursor:zoom-out}
+    .lightbox img{max-height:calc(100vh - 80px);max-width:min(100%,930px);object-fit:contain;box-shadow:0 20px 60px #0008}
+    .lightbox button{position:absolute;right:24px;top:18px;border:1px solid #ffffff72;background:#0c2d46;color:#fff;border-radius:50%;width:42px;height:42px;font-size:25px;cursor:pointer}
+    /* Production LP: each message is explained once, with native HTML visuals. */
+    .insight-scene{position:relative;background:#f8fffc;border:1px solid #bce6e4;border-radius:14px;padding:22px;box-shadow:0 32px 65px #07334e3b;transform:rotate(1.1deg);max-width:475px;margin:auto;color:var(--navy)}
+    .scene-head{display:flex;align-items:center;justify-content:space-between;color:#4b7385;font-size:10px;font-weight:800;letter-spacing:.17em;border-bottom:1px solid #d9e8eb;padding-bottom:13px}
+    .scene-dot{width:9px;height:9px;border-radius:50%;background:var(--mint-dark);box-shadow:0 0 0 4px #c5f8e8}
+    .scene-messages{padding-top:21px;display:grid;gap:11px}.scene-message{display:flex;align-items:flex-start;gap:10px;max-width:91%}.scene-message.alt{justify-self:end;flex-direction:row-reverse}
+    .scene-message .avatar{flex:0 0 32px;width:32px;height:32px;display:grid;place-items:center;border-radius:50%;font:700 12px var(--sans);color:#195575;background:#d7eaf6}
+    .scene-message.alt .avatar{background:#bdf5df;color:#15624e}
+    .scene-message p{margin:0;border-radius:8px;background:#eef4f7;padding:11px 13px;font-size:11px;line-height:1.85}.scene-message.alt p{background:#dcfaed}
+    .scene-bridge{margin:17px 0;padding:15px 11px;border-radius:7px;background:#0e304c;color:#cbe2e8;font-size:11px;line-height:1.65;text-align:center}
+    .scene-bridge span{display:block;color:#86f0d4;font-size:18px;font-weight:800;letter-spacing:-.035em}.scene-bridge b{display:block;color:#77e8d2;margin-top:3px;font-size:18px}
+    .scene-insight{background:#fff;border:1px solid #d7e9ed;border-left:4px solid #40cba8;padding:16px;border-radius:5px}
+    .scene-badge{display:block;font:800 9px var(--sans);letter-spacing:.14em;color:#15947f;margin-bottom:7px}.scene-insight strong{font:600 15px/1.65 var(--serif);display:block}
+    .scene-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:12px}.scene-tags span{font-size:10px;padding:6px 8px;background:#e3faf1;color:#126455;border-radius:3px}
+    .scene-note{font-size:9px;color:#638294;text-align:right;margin:13px 0 0}
+    .why-answer{display:flex;justify-content:space-between;align-items:center;gap:20px;background:#092341;color:#fff;padding:25px 32px;margin-top:30px;border-left:5px solid var(--mint)}
+    .why-answer>span{font-size:12px;color:#85e9d4;white-space:nowrap}.why-answer strong{font:600 22px var(--serif)}.why-answer a{text-decoration:none;font-size:12px;color:#fff;border-bottom:1px solid var(--mint);padding-bottom:5px;white-space:nowrap}
+    .report-preview{width:100%;max-width:520px;margin-inline:auto}.report-preview .mini-report{transform:none;box-shadow:0 25px 60px #09234121;border-radius:9px}
+    .report-preview .mini-body{padding:22px}.report-preview .mini-panel p{font-size:10px}.report-preview .mini-panel h3{font-size:12px}.report-preview .mini-name{font-size:14px}
+    .preview-label{vertical-align:middle;color:#168e78;background:#d6f6ea;padding:4px 7px;margin-left:4px;border-radius:3px;font-size:9px;white-space:nowrap}
+    .report-preview .mini-row>*{font-size:10px;line-height:1.5}
+    .proof-visual{width:100%;max-width:490px;background:#fff;border:1px solid #d9e5ea;box-shadow:0 25px 50px #18355017;border-radius:9px;padding:26px;color:var(--navy)}
+    .proof-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}.proof-step{font-size:11px;letter-spacing:.07em;font-weight:800;color:#148b7b}.proof-tag{font:700 9px var(--sans);color:#278b8d;background:#dbf7f1;padding:8px}
+    .proof-summary{margin-top:19px;border:1px solid #dce9ec;padding:22px;border-radius:5px}.proof-summary strong{font:600 20px/1.8 var(--serif)}.proof-summary p{color:#637d8a;font-size:11px;margin:14px 0 0}.proof-summary a{color:#056d63;text-decoration:none;background:#c9fbeb;padding:3px 5px;font-weight:800}
+    .proof-line{text-align:center;color:#138d7d;font-size:12px;padding:14px 0;display:flex;align-items:center;flex-direction:column;gap:4px}.proof-source{background:#ebfaf5;border-radius:5px;padding:20px;scroll-margin-top:90px}
+    .proof-person{display:flex;gap:11px;align-items:center;margin:18px 0 12px}.proof-person>span:nth-child(2){font-size:12px;font-weight:800}.proof-person small{display:block;font-size:10px;font-weight:400;color:#738d9d;margin-top:3px}
+    .proof-avatar{display:grid;place-items:center;width:38px;height:38px;background:#c4e9e1;color:#1d7266;border-radius:50%;font-weight:800}.proof-source p{background:#fff;padding:15px;border-radius:4px;margin:0;font-size:12px;line-height:1.95}
+    .proof-footer{margin-top:19px;font-size:12px;font-weight:700}.proof-check{display:inline-grid;place-items:center;background:#c6f4df;color:#11876d;border-radius:50%;width:22px;height:22px;margin-right:5px}
+    .people-search{width:100%;max-width:540px;margin:auto;background:#fff;border-radius:9px;overflow:hidden;color:var(--navy);box-shadow:0 25px 70px #0005}
+    .search-ui-top{background:#eaf2f5;display:flex;align-items:center;justify-content:space-between;padding:14px 19px;font-size:11px;font-weight:800}.search-ui-top span:last-child{font-size:9px;color:#6c8995;font-weight:500}
+    .search-input-mock{display:flex;align-items:center;gap:10px;margin:22px 21px 10px;padding:7px 7px 7px 13px;border:2px solid #61d8bc;border-radius:6px}
+    .search-input-mock>span{font-size:25px;color:#208f82}.search-input-mock p{flex:1;margin:0;font-size:11px;line-height:1.5}.search-input-mock b{font-size:11px;background:#0c3552;color:#fff;padding:12px 14px;border-radius:4px}
+    .search-results-label{margin:16px 22px 8px;font-size:12px;font-weight:800}.search-results-label span{font-size:10px;color:#718693;font-weight:400;margin-left:5px}
+    .person-result{margin:10px 21px;padding:15px;border:1px solid #dbe6ea;border-radius:5px}.result-top{display:flex;align-items:center;gap:12px;margin-bottom:13px}.result-avatar{display:grid;place-items:center;flex:0 0 38px;height:38px;border-radius:50%;color:#1b7567;background:#c5f3e7;font-weight:800}.result-avatar.secondary{color:#5272a0;background:#dce9fc}.result-top h3{font-size:13px;margin:0 0 2px}.result-top p{color:#8493a2;font-size:10px;margin:0}.result-chip{margin-left:auto;background:#dff9ef;color:#14886f;padding:5px 8px;font-size:9px;white-space:nowrap}.person-result>strong{font-size:12px;line-height:1.8;display:block}.result-reference{border-top:1px solid #e4edee;font-size:10px;color:#3e857b;margin-top:11px;padding-top:9px}.mock-caption{color:#7b91a0;font-size:9px;line-height:1.6;text-align:right;margin:12px 21px 18px}
+    .custom-panel{background:#fff;border:1px solid #d9e9e8;border-radius:8px;box-shadow:0 24px 55px #09234116;overflow:hidden;max-width:520px;width:100%;margin:auto}
+    .custom-panel-head{display:flex;justify-content:space-between;align-items:center;background:#e7fbf4;padding:23px}.custom-panel-head span:first-child{font-size:9px;font-weight:700;color:#168a76;letter-spacing:.11em}.custom-panel-head h3{font:600 19px/1.6 var(--serif);margin:7px 0 0}.custom-spark{font-size:30px;color:#1cb89e}
+    .custom-table{padding:0 23px}.custom-row{display:grid;grid-template-columns:36% 1fr;gap:12px;border-bottom:1px solid #e1eced;padding:17px 4px;align-items:center}.custom-row.head{font-size:10px;color:#6d8b94;letter-spacing:.08em;padding:12px 4px}.custom-row strong{font-size:12px}.custom-row>span{font-size:13px;font-weight:700}.custom-row small{display:block;font-weight:400;color:#7c8f9b;margin-top:7px;font-size:10px}
+    .custom-tags{display:flex;flex-wrap:wrap;gap:7px;padding:18px 22px 0}.custom-tags span{background:#e6f8f0;color:#12836f;font-size:10px;padding:8px 10px;border-radius:3px}
+    .cycle-modes{display:grid;grid-template-columns:1fr 1fr;gap:20px;border-top:1px solid #ffffff35;padding-top:35px}
+    .cycle-mode{display:flex;align-items:center;gap:17px;background:#ffffff0b;border:1px solid #ffffff2a;padding:24px}.mode-icon{display:grid;place-items:center;width:51px;height:51px;flex:0 0 51px;border-radius:50%;font-size:32px;background:#d4fff2;color:#075c59}.cycle-mode strong{font-size:16px}.cycle-mode p{font-size:12px;color:#b5ced9;line-height:1.8;margin:7px 0 0}
+    @media(max-width:1100px){.tagline{display:none}.feature-grid{gap:55px}.nav{gap:16px}}
+    @media(max-width:860px){
+      .wrap{width:min(100% - 36px,680px)}.header-inner{min-height:70px}.logo img{width:132px}
+      .nav{position:absolute;display:none;top:70px;left:0;right:0;background:#fff;padding:20px 25px 25px;flex-direction:column;align-items:stretch;border-bottom:1px solid var(--line);box-shadow:0 18px 30px #1234}.nav.open{display:flex}
+      .menu-toggle{display:block;margin-left:auto}.header-cta{display:none}
+      .hero-grid{grid-template-columns:1fr;min-height:auto;padding-block:75px 90px;gap:30px}.hero-visual{max-width:510px;margin:0 auto;width:100%}
+      .hero-disclaimer{right:20px}.hero h1{font-size:clamp(40px,6.2vw,57px)}
+      .triad-grid{gap:0}.triad-item{padding:8px 17px}.triad-item h3{font-size:18px}.pain-card{grid-template-columns:180px 1fr;gap:22px}
+      .feature{padding:83px 0}.feature-grid,.feature-grid.reverse{grid-template-columns:1fr;gap:45px}.feature-grid.reverse .feature-copy,.feature-grid.reverse .poster-col{order:initial}
+      .poster-col{max-width:420px}.why{padding:87px 0 95px}.steps{padding:90px 0}.steps-grid{grid-template-columns:repeat(2,1fr)}.step:nth-child(2)::after{display:none}
+      .cycle-bottom{grid-template-columns:1fr;gap:26px}
+    }
+    @media(max-width:560px){
+      .header-inner{min-height:67px}.nav{top:67px}
+      .hero-grid{padding:64px 0 75px}.hero h1{font-size:clamp(31px,8.1vw,45px);line-height:1.5}
+      .hero-lead{font-size:16px}.hero-desc{font-size:12px}.hero-actions{display:grid}.hero-actions .btn{width:100%}
+      .hero-visual{max-width:360px;padding-top:40px}.mini-body{padding:13px}.mini-panels{gap:7px}.mini-panel{padding:10px 8px}.mini-panel p{font-size:8px}
+      .mini-stamp{right:0;bottom:-18px}.triad-grid{grid-template-columns:1fr;padding-block:20px}.triad-item{display:grid;grid-template-columns:68px 1fr;padding:18px 0;border:0;border-bottom:1px solid #e5eeee;gap:0 8px}.triad-item:last-child{border:0}.triad-n{grid-row:span 2;font-size:36px}.triad-item h3{margin:0;font-size:18px}.triad-item p{margin-top:5px}
+      .insight-scene{padding:15px;transform:none}.scene-message p{font-size:10px}.scene-insight strong{font-size:13px}.why-answer{display:grid;gap:10px;padding:24px}.why-answer strong{font-size:21px}.why-answer a{justify-self:start}
+      .report-preview .mini-body{padding:13px}.report-preview .mini-panels{grid-template-columns:1fr 1fr}.report-preview .mini-panel p{font-size:10px}.report-preview .mini-name{font-size:12px}.report-preview .mini-row>*{font-size:9px;padding:8px 5px}
+      .proof-visual{padding:18px}.proof-summary strong{font-size:18px}.people-search .search-input-mock{margin-inline:14px}.person-result{margin-inline:14px}.custom-table{padding-inline:12px}.custom-row{grid-template-columns:40% 1fr}.custom-row strong{font-size:11px}.custom-row>span{font-size:11px}
+      .cycle-modes{grid-template-columns:1fr}.cycle-mode{padding:18px}
+      .why{padding:70px 0 78px}.section-heading h2,.feature h2{font-size:34px}.comparison-labels{gap:8px}.comparison-labels span{font-size:15px;padding:12px 5px}
+      .comparison-row{grid-template-columns:1fr 25px 1fr}.compare{padding:17px 12px;min-height:145px}.compare h3{font-size:13px;line-height:1.5}.compare p{font-size:10px}.compare-connector{font-size:18px}
+      .why-closer{font-size:25px;line-height:1.65}.pain-card{min-height:112px;grid-template-columns:98px 1fr;gap:13px;padding:13px 4px}.pain-card .symbol{font-size:73px}.pain-card h3{font-size:19px;margin:0}.feature{padding:72px 0}.feature .lead{font-size:13px}.feature-bullets li{font-size:12px}.poster-caption{left:-9px;bottom:17px}
+      .evidence-demo{grid-template-columns:1fr}.search-example p{font-size:16px}.role{grid-template-columns:90px 1fr;font-size:11px}.steps-grid{grid-template-columns:1fr;margin:35px 0}.step{min-height:auto;padding:22px}.step::after{display:none}.steps{padding:75px 0}.steps h2{font-size:35px}
+      .cta{padding:82px 0}.cta h2{font-size:34px}.cta-actions{display:grid}.cta-actions a{width:100%}
+      .disclaimer .wrap{display:block}.disclaimer strong{display:block;margin-bottom:9px}
+      .footer-inner{display:block}.footer-meta{text-align:left;margin-top:22px}
+      .lightbox{padding:50px 10px}.lightbox img{max-height:calc(100vh - 90px)}.lightbox button{top:10px;right:10px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.poster-frame{transition:none}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="wrap header-inner">
+      <a class="logo" href="#top" aria-label="HRobo トップへ"><img src="assets/HRobo_LOGO.png" alt="HRobo"></a>
+      <span class="tagline">人と組織の対話を、<br>もっと深く、確かなものに。</span>
+      <nav class="nav" id="main-nav" aria-label="メインナビゲーション">
+        <a href="#why">よくある課題</a>
+        <a href="#report">できること</a>
+        <a href="#cycle">活用の流れ</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
+      <a class="btn btn-dark header-cta" href="#contact">詳しく見る <span class="arrow" aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false" aria-controls="main-nav">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="top" class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow" style="color:#0c817c">01 ｜ HRoboとは？</div>
+          <h1>仕事のやりとりを、<br><span class="glow">組織の力に。</span></h1>
+          <p class="hero-lead">社員の強みを見える化する、<br>AI人材マネジメントツール。</p>
+          <p class="hero-desc">気づく。確かめる。活かす。</p>
+          <div class="hero-actions">
+            <a href="#why" class="btn btn-mint">よくある課題を見る <span class="arrow" aria-hidden="true">→</span></a>
+            <a href="#report" class="btn btn-ghost" style="color:var(--navy);border-color:#245c65">5つのできることを見る <span class="arrow" aria-hidden="true">↘</span></a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="HRoboが日々の業務コミュニケーションを整理する仕組み">
+          <div class="insight-scene">
+            <div class="scene-head"><span>DAILY CONVERSATIONS</span><span class="scene-dot" aria-hidden="true"></span></div>
+            <div class="scene-messages">
+              <div class="scene-message"><span class="avatar">A</span><p>お客様への提案、<br>今日中に資料をまとめます。</p></div>
+              <div class="scene-message alt"><span class="avatar">B</span><p>関連部署にも共有して、<br>進め方をそろえましょう。</p></div>
+              <div class="scene-message"><span class="avatar">C</span><p>前回の経験をもとに、<br>後輩もサポートします。</p></div>
+            </div>
+            <div class="scene-bridge"><span>HRobo</span> 日々の会話から、強みの手掛かりを整理 <b aria-hidden="true">↓</b></div>
+            <div class="scene-insight"><span class="scene-badge">REPORT INSIGHT</span><strong>チームを支える行動が、見えてくる。</strong><div class="scene-tags"><span>情報共有</span><span>協働</span><span>育成への関わり</span></div></div>
+            <p class="scene-note">※画面構成・発言は説明用のイメージです。</p>
+          </div>
+        </div>
+      </div>
+      <p class="hero-disclaimer">※掲載画面は説明用のイメージです。</p>
+    </section>
+
+    <section id="why" class="why">
+      <div class="wrap">
+        <div class="section-heading">
+          <span class="section-index">02 ｜ こんな課題、ありませんか？</span>
+          <h2>人の強み、<br>見えていますか。</h2>
+        </div>
+        <div class="pain-grid">
+          <div class="pain-card"><span class="symbol" aria-hidden="true">01</span><h3>メンバーの強みを<br>把握しきれない</h3></div>
+          <div class="pain-card"><span class="symbol" aria-hidden="true">02</span><h3>判断の根拠が曖昧</h3></div>
+          <div class="pain-card"><span class="symbol" aria-hidden="true">03</span><h3>適任者を探しにくい</h3></div>
+        </div>
+        <div class="why-answer"><span>HRoboでできること</span><strong>気づく。確かめる。活かす。</strong><a href="#report">解決の仕組みを見る <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+
+    <section id="report" class="feature">
+      <div class="wrap feature-grid">
+        <div class="feature-copy">
+          <span class="section-index">03 ｜ 日々の仕事を可視化</span>
+          <h2>日々の仕事に、<br>光を当てる。</h2>
+          <p class="lead">日常のやりとりから、メンバーの強みをレポートに。普段は見えにくい仕事や貢献を、チームで話せる形に整理します。</p>
+          <ul class="feature-bullets">
+            <li>最近の主なトピックを整理</li>
+            <li>業務の中で発揮される強みを見える化</li>
+            <li>日々のコミュニケーションから気になる兆候を把握する手掛かりに</li>
+          </ul>
+          <span class="feature-foot">※画面・人物・レポート内容は説明用のイメージです。</span>
+        </div>
+        <div class="report-preview" role="img" aria-label="HRoboのレポート画面を模した説明用イメージ。総合コメント、特性サマリ、詳細レポートを表示">
+          <div class="mini-report">
+            <div class="mini-top"><span class="mini-mark"><i aria-hidden="true"></i> HRobo</span><span>レポート ／ メンバー一覧</span></div>
+            <div class="mini-body">
+              <div class="mini-name">田中 太郎さんの分析レポート <span class="preview-label">画面イメージ</span></div>
+              <div class="mini-meta">営業部　／　マネージャー　　2024.04.01 – 06.30</div>
+              <div class="mini-panels">
+                <div class="mini-panel"><h3>総合コメント</h3><p>部署をまたぐ情報共有を積極的に行い、チームの連携を支えています。丁寧な説明と迅速な対応が強みです。</p></div>
+                <div class="mini-panel"><h3>特性サマリ</h3>
+                  <svg class="radar" viewBox="0 0 180 145" aria-hidden="true"><g fill="none" stroke="#d8e0ea" stroke-width="1"><polygon points="90,14 145,48 145,105 90,136 35,105 35,48"/><polygon points="90,37 125,59 125,94 90,114 55,94 55,59"/><path d="M90 14V136M35 48L145 105M145 48L35 105"/></g><polygon points="90,36 131,57 122,99 90,122 46,98 50,57" fill="#5969bc44" stroke="#5465b2" stroke-width="2"/><g fill="#31518b"><circle cx="90" cy="36" r="3"/><circle cx="131" cy="57" r="3"/><circle cx="122" cy="99" r="3"/><circle cx="90" cy="122" r="3"/><circle cx="46" cy="98" r="3"/><circle cx="50" cy="57" r="3"/></g></svg>
+                </div>
+              </div>
+              <div class="mini-table"><div class="mini-row"><span>観点</span><span>サマリ</span><span>詳細</span></div><div class="mini-row"><span>最近の主なトピック</span><span>新規提案を主導</span><span>関係者と情報を共有</span></div><div class="mini-row"><span>強み</span><span>丁寧な説明</span><span>チームの連携を支援</span></div><div class="mini-row"><span>育成のポイント</span><span>知識共有</span><span>経験を後輩に伝える</span></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="evidence" class="feature tint">
+      <div class="wrap feature-grid reverse">
+        <div class="feature-copy">
+          <span class="section-index">04 ｜ 根拠をすぐに確認</span>
+          <h2>「なぜ？」に、<br>答えられる。</h2>
+          <p class="lead">レポートの記述から、もとになった発言へ。確認できる根拠があるから、一人ひとりと納得できる対話を進められます。</p>
+          <ul class="feature-bullets">
+            <li>主な記述に対応する発言への参照を表示</li>
+            <li>もとのやりとりを確認しながら話せる</li>
+            <li>AIが出した結果を、人が確かめて活用する</li>
+          </ul>
+          <span class="feature-foot">※記述・発言は説明用の架空例です。</span>
+        </div>
+        <div class="proof-visual" aria-label="レポートと根拠発言の対応例">
+          <div class="proof-heading"><span class="proof-step">01 / レポートの記述</span><span class="proof-tag">REFERENCES [1]</span></div>
+          <div class="proof-summary"><strong>情報共有で、部署間の連携を支えている。</strong><p>関連する発言 <a href="#proof-source" aria-label="元の発言に移動">［1］</a> を確認</p></div>
+          <div class="proof-line" aria-hidden="true"><span>根拠をたどる</span>↓</div>
+          <div class="proof-source" id="proof-source"><span class="proof-step">02 / 元の発言</span>
+            <div class="proof-person"><span class="proof-avatar">A</span><span>営業部 Aさん<small>2024 / 06 / 14</small></span></div>
+            <p>「背景と目的を先に共有すると、みんなが判断しやすくなると思います。」</p>
+          </div>
+          <div class="proof-footer"><span class="proof-check">✓</span> 結論だけでなく、理由も確認できる。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="search" class="feature dark">
+      <div class="wrap feature-grid">
+        <div class="feature-copy">
+          <span class="section-index" style="color:var(--mint)">05 ｜ 社内の人材を発見</span>
+          <h2>探していた人材が、<br>社内にいる。</h2>
+          <p class="lead">社内に眠る経験やスキルを横断的に見つけ出す。HRoboの人材検索なら、自然な言葉で条件に合う候補者を探せます。</p>
+          <ul class="feature-bullets" style="margin-top:30px">
+            <li>候補者と推薦理由を確認</li>
+            <li>関連する発言を参照</li>
+            <li>追加条件による絞り込み</li>
+          </ul>
+          <span class="feature-foot">※検索例・候補者は架空の例です。</span>
+        </div>
+        <div class="people-search" aria-label="人材検索の画面イメージ">
+          <div class="search-ui-top"><span>HRobo / 人材検索</span><span>画面イメージ</span></div>
+          <div class="search-input-mock"><span aria-hidden="true">⌕</span><p>新規事業の経験があり、若手育成にも関わった人</p><b>検索</b></div>
+          <p class="search-results-label">検索候補 <span>条件に合う経験・行動を確認</span></p>
+          <article class="person-result"><div class="result-top"><span class="result-avatar">A</span><div><h3>候補 A</h3><p>事業開発部 ／ プロジェクトリーダー</p></div><span class="result-chip">候補者</span></div><strong>新規事業の立ち上げを主導し、若手育成にも注力。</strong><div class="result-reference">根拠となる発言：事業立ち上げ／育成支援</div></article>
+          <article class="person-result"><div class="result-top"><span class="result-avatar secondary">B</span><div><h3>候補 B</h3><p>事業企画部 ／ メンター</p></div><span class="result-chip">候補者</span></div><strong>新規領域の開拓と、若手の育成に携わった経験。</strong><div class="result-reference">根拠となる発言：企画推進／1on1</div></article>
+          <p class="mock-caption">※架空の検索結果です。実際の画面・表示項目とは異なる場合があります。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="customize" class="feature">
+      <div class="wrap feature-grid reverse">
+        <div class="feature-copy">
+          <span class="section-index">06 ｜ 自社の観点で捉える</span>
+          <h2>自社に合わせて、<br>見る観点を変える。</h2>
+          <p class="lead">同じ行動でも、役割や業務によって大切な意味は異なります。自社の方針や評価制度に合わせて、観察の視点を設計できます。</p>
+          <ul class="feature-bullets" style="margin-top:28px">
+            <li>観点の追加・編集</li>
+            <li>観点ごとの重要度の調整</li>
+            <li>目的に応じた観察期間の設定</li>
+          </ul>
+        </div>
+        <div class="custom-panel" aria-label="職種に合わせた観察観点の例">
+          <div class="custom-panel-head"><div><span>ORGANIZATION DESIGN</span><h3>役割に合わせて、見るポイントを変える。</h3></div><span class="custom-spark" aria-hidden="true">✳</span></div>
+          <div class="custom-table"><div class="custom-row head"><span>職種</span><span>観察の観点</span></div><div class="custom-row"><strong>営業</strong><span>顧客との信頼構築<small>関係づくり・丁寧な対応</small></span></div><div class="custom-row"><strong>エンジニア</strong><span>技術選定の根拠<small>判断した理由の共有</small></span></div><div class="custom-row"><strong>カスタマーサクセス</strong><span>先回りした対応<small>顧客課題の早期把握</small></span></div></div>
+          <div class="custom-tags"><span>観点を編集</span><span>重要度を調整</span><span>期間を設定</span></div>
+          <p class="mock-caption">※記載した観点は活用例です。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cycle" class="steps">
+      <div class="wrap">
+        <span class="eyebrow">07 ｜ 変化を継続して捉える</span>
+        <h2>変化を捉え、<br>対話を続ける。</h2>
+        <p class="steps-intro">一度きりの記録で終わらせず、日々のやりとりを定期的に振り返る。レポートを、継続的な1on1の材料に。</p>
+        <div class="steps-grid">
+          <div class="step"><span class="step-n">01</span><h3>日々のやりとり</h3><p>業務コミュニケーションをもとに情報を整理します。</p></div>
+          <div class="step"><span class="step-n">02</span><h3>レポート生成</h3><p>あらかじめ設定した周期でレポートを生成します。</p></div>
+          <div class="step"><span class="step-n">03</span><h3>内容を確認</h3><p>記述と根拠を確認し、変化を捉えます。</p></div>
+          <div class="step"><span class="step-n">04</span><h3>1on1で活用</h3><p>振り返りと次の対話に役立てます。</p></div>
+        </div>
+        <div class="cycle-modes"><div class="cycle-mode"><span class="mode-icon" aria-hidden="true">◷</span><div><strong>自動生成</strong><p>日次・週次・月次で、レポートを定期生成。</p></div></div><div class="cycle-mode"><span class="mode-icon" aria-hidden="true">✧</span><div><strong>手動生成</strong><p>必要なタイミングで、その場でレポートを作成。</p></div></div></div>
+      </div>
+    </section>
+
+    <section id="contact" class="cta">
+      <div class="wrap">
+        <span class="section-index">FOR A BRIGHTER WORKPLACE</span>
+        <h2>人と組織の対話を、<br>もっと深く、確かなものに。</h2>
+        <p>HRoboの詳しい機能や導入の進め方は、公式製品ページをご確認ください。貴社の業務や組織に合う活用方法をご案内します。</p>
+        <div class="cta-actions">
+          <a class="btn btn-dark" href="https://www.iplot.jp/products/hrobo" target="_blank" rel="noopener noreferrer">HRobo公式製品ページへ <span class="arrow" aria-hidden="true">↗</span></a>
+          <a class="btn" href="#top" style="border-color:#abbcc4;background:#fff">ページの先頭に戻る ↑</a>
+        </div>
+      </div>
+    </section>
+
+    <aside class="disclaimer" aria-label="掲載内容に関する注記">
+      <div class="wrap">
+        <strong>掲載内容について</strong>
+        <p>※本ページの画面・人物・発言・検索結果は機能説明用のイメージおよび架空例です。実際の仕様・画面は変更となる場合があります。<br>※一部機能（メール・Microsoft Teams連携など）は現在開発中です。提供状況はお問い合わせ時にご確認ください。</p>
+      </div>
+    </aside>
+  </main>
+  <footer>
+    <div class="wrap footer-inner">
+      <div class="footer-brand"><b>H</b>Robo</div>
+      <div class="footer-meta">HRobo — 株式会社IPLoT<br><a href="https://www.iplot.jp/products/hrobo" target="_blank" rel="noopener noreferrer">公式製品ページ</a></div>
+    </div>
+  </footer>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="資料画像を拡大表示" hidden>
+    <button type="button" id="lightbox-close" aria-label="画像を閉じる">×</button>
+    <img id="lightbox-image" src="" alt="">
+  </div>
+  <script>
+    (() => {
+      const nav = document.getElementById('main-nav');
+      const toggle = document.querySelector('.menu-toggle');
+      const closeMenu = () => { nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); toggle.setAttribute('aria-label','メニューを開く'); };
+      toggle.addEventListener('click', () => {
+        const opening = !nav.classList.contains('open');
+        nav.classList.toggle('open', opening);
+        toggle.setAttribute('aria-expanded', String(opening));
+        toggle.setAttribute('aria-label', opening ? 'メニューを閉じる' : 'メニューを開く');
+      });
+      nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+      const modal=document.getElementById('lightbox'), modalImg=document.getElementById('lightbox-image');
+      const dismiss=()=>{modal.hidden=true;modalImg.removeAttribute('src');document.body.style.overflow='';};
+      document.querySelectorAll('[data-lightbox]').forEach(a=>a.addEventListener('click',(e)=>{
+        e.preventDefault();modalImg.src=a.getAttribute('href');modalImg.alt=a.getAttribute('aria-label')||'資料画像の拡大表示';modal.hidden=false;document.body.style.overflow='hidden';
+        document.getElementById('lightbox-close').focus();
+      }));
+      document.getElementById('lightbox-close').addEventListener('click',dismiss);
+      modal.addEventListener('click',e=>{if(e.target===modal)dismiss()});
+      document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)dismiss()});
+    })();
+  </script>
+</body>
+</html>
